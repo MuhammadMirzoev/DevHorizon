@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 def connect_db():
     return sqlite3.connect("DevHorizon.db")
-
+# https://github.com/MuhammadMirzoev/DevHorizon
 # Swagger UI setup
 SWAGGER_URL = '/api/docs'
 API_URL = '/static/swagger.json'
