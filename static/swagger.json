@@ -1,0 +1,173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Project Management API",
+    "description": "API для управления пользователями, задачами, ролями и квалификациями."
+  },
+  "host": "127.0.0.1:5000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Получить всех пользователей",
+        "responses": {
+          "200": {
+            "description": "Список пользователей",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "username": {"type": "string"},
+                  "role_id": {"type": "integer"},
+                  "email": {"type": "string"},
+                  "qualification_level": {"type": "integer"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Добавить нового пользователя",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {"type": "string"},
+                "password": {"type": "string"},
+                "role_id": {"type": "integer"},
+                "email": {"type": "string"},
+                "qualification_level": {"type": "integer"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {"description": "Пользователь создан"},
+          "400": {"description": "Ошибка создания пользователя"}
+        }
+      }
+    },
+    "/roles": {
+      "get": {
+        "summary": "Получить все роли",
+        "responses": {
+          "200": {
+            "description": "Список ролей",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "name": {"type": "string"},
+                  "description": {"type": "string"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "summary": "Получить все задачи",
+        "responses": {
+          "200": {
+            "description": "Список задач",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "title": {"type": "string"},
+                  "description": {"type": "string"},
+                  "assigned_user_id": {"type": "integer"},
+                  "status": {"type": "string"},
+                  "deadline": {"type": "string", "format": "date"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Добавить новую задачу",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {"type": "string"},
+                "description": {"type": "string"},
+                "assigned_user_id": {"type": "integer"},
+                "status": {"type": "string"},
+                "deadline": {"type": "string", "format": "date"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {"description": "Задача создана"},
+          "400": {"description": "Ошибка создания задачи"}
+        }
+      }
+    },
+    "/qualifications": {
+      "get": {
+        "summary": "Получить квалификации сотрудников",
+        "responses": {
+          "200": {
+            "description": "Список квалификаций",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "user_id": {"type": "integer"},
+                  "points": {"type": "integer"},
+                  "evaluation_date": {"type": "string", "format": "date"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Добавить квалификацию сотруднику",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user_id": {"type": "integer"},
+                "points": {"type": "integer"},
+                "evaluation_date": {"type": "string", "format": "date"}
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {"description": "Квалификация добавлена"},
+          "400": {"description": "Ошибка добавления квалификации"}
+        }
+      }
+    }
+  }
+}
